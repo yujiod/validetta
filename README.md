@@ -33,7 +33,7 @@ include the dependent libraries and css files
 <link href="validetta/validetta.css" rel="stylesheet" type="text/css" media="screen" >
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript" src="validetta/validetta.js"></script>   
+<script type="text/javascript" src="validetta/validetta.js"></script>
 ```
 
 You can include language file if you want.
@@ -61,18 +61,18 @@ and add `data-validetta` attribute to element which you want to validate.
 - `number` : It checks fields if it is consist of number or not.
 - `email` : It checks E-mail if it is valid or not.
 - `creditCard` : It checks credit card number written to fields if it is valid or not.
-- `equal[input_name]` : It checks if the two fields are equal to each other according to input name. `input_name` should not be greater than 15 characters!
+- `equal[element_id]` : It checks if the two fields are equal to each other according to input element id. `element_id` should not be greater than 30 characters!
 - `minLength[x]` : It checks fields if it is consist of minimal X character.
 - `maxLength[x]` : It checks maximal X character entry to the area.
 - `minChecked[x]` : It checks minimal X option if it is marked or not.
 - `maxChecked[x]` : It checks maximal X option if it is marked or not.
 - `minSelected[x]` : It checks minimal X option if it is chosen or not.
 - `maxSelected[x]` : It checks maximal X option if it is chosen or not.
-- `customReg[regexp_name]` : It checks if field is suits to identified ordered expression or not. `regexp_name` should not be greater than 15 characters!
+- `customReg[regexp_name]` : It checks if field is suits to identified ordered expression or not. `regexp_name` should not be greater than 30 characters!
 
 ## Options { }
 
-### errorClass 
+### errorClass
 
 If you want special style, you can add a class to error message with this option.
 
@@ -82,7 +82,7 @@ If you want special style, you can add a class to error message with this option
 }
 ```
 
-### errorCloseClass 
+### errorCloseClass
 
 You can add a class to error message closure button.
 
@@ -94,7 +94,7 @@ You can add a class to error message closure button.
 
 ### ajax
 
-It provides ajax request after validate process is completed. 
+It provides ajax request after validate process is completed.
 
 ```javascript
 {

@@ -5,7 +5,7 @@
  * @Browser Support : ie8 or above, and all modern browsers
  *
  * Examples : http://lab.hasanaydogdu.com/validetta/#examples
- * GitHub Repository : https://github.com/hsnayd/validetta 
+ * GitHub Repository : https://github.com/hsnayd/validetta
  * Lisans: MIT ve GPL
  *  * http://www.opensource.org/licenses/mit-license.php
  *  * http://www.gnu.org/licenses/gpl.txt
@@ -22,7 +22,7 @@
     var Validetta = {}, // Plugin Class
         fields = {}, // Current fields/fieldss
         // RegExp for input validate rules
-        reg = new RegExp( /(minChecked|maxChecked|minSelected|maxSelected|minLength|maxLength|equal|customReg)\[[(\w)-_]{1,15}\]/i ),
+        reg = new RegExp( /(minChecked|maxChecked|minSelected|maxSelected|minLength|maxLength|equal|customReg)\[[(\w)-_]{1,30}\]/i ),
         // RegExp for mail control method
         // @from ( http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29 )
         regMail = new RegExp( /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/ ),
@@ -71,7 +71,7 @@
      *
      * @param {object} form : <form> element which being controlled
      * @param {object} options : User-specified settings
-     * @return {method} events 
+     * @return {method} events
      */
     Validetta = function( form, options ){
         /**
@@ -88,12 +88,12 @@
     /**
      * @method events
      *   This is the method of handling events
-     * 
+     *
      * @return {method} init, {method} reset or {boolean} false
      */
     Validetta.prototype.events = function(){
         var that = this; // stored this
-        // Handle submit event 
+        // Handle submit event
         $( this.form ).submit( function( e ){
             // fields to be controlled transferred to global variable
             fields = this.querySelectorAll( '[data-validetta]' );
@@ -131,25 +131,25 @@
     /**
      * @method init
      *   In this method, fields are validated
-     * 
+     *
      * @params {Object} e : event object
      * @return {Function} or {Boolen}
      */
     Validetta.prototype.init = function( e ){
         var that = this; // stored this
-        // Reset error windows from all elements 
+        // Reset error windows from all elements
         this.reset.call( this, fields );
         // Start control each elements
         for ( var i = fields.length - 1; i >= 0; i-- ) {
             /**
              * Declaring variables
-             * 
+             *
              * @params {object} _el : current field
              * @params {string} _errors : current field's errors
              * @params {array} _val : current field's value
-             * @params {array} _methods : current field's control methods 
+             * @params {array} _methods : current field's control methods
              */
-            var _el, _errors, _val = [], _methods = []; 
+            var _el, _errors, _val = [], _methods = [];
             _el = fields[i];
             _errors = '';
             _val = $( _el ).val();
@@ -163,7 +163,7 @@
                     var _elType = _el.getAttribute('type');
                     if( _elType === 'checkbox' && !that.check.checkbox.checked( _el ) ){ _errors += messages.checkbox+'<br />'; }
                     else if( _el.tagName ==='SELECT' && !that.check.selectbox.selected( _val ) ){ _errors += messages.selectbox+'<br />'; }
-                    if( ( _elType ==='text' || _elType ==='password' || _el.tagName ==='TEXTAREA' ) && !that.check.empty.call( that, _val ) ){ _errors += messages.empty+'<br />'; }  
+                    if( ( _elType ==='text' || _elType ==='password' || _el.tagName ==='TEXTAREA' ) && !that.check.empty.call( that, _val ) ){ _errors += messages.empty+'<br />'; }
                 }
                 // Number Control
                 if( _methods[j] === 'number' && !that.check.number( _val ) ){
@@ -182,7 +182,7 @@
                     // get rules
                     // And start to check rules
                     // {count} which used below is the specified maximum or minimum value
-                    // e.g if method is minLength and  rule is 2 ( minLength[2] ) 
+                    // e.g if method is minLength and  rule is 2 ( minLength[2] )
                     // Output error windows text will be : 'Please select minimum 2 options. '
                     var rules = _methods[j].split( /\[|,|\]/ );
                     if( rules[0] === 'maxLength' && !that.check.maxLength( _val, rules[1] ) ){
@@ -255,11 +255,11 @@
         },
         // Equal check
         equal : function( val, arg ){
-            return ( $( this.form ).find( 'input[name='+ arg +']' ).val() !== val ) ? false : true;
+            return ( $( this.form ).find( 'input#'+ arg ).val() !== val ) ? false : true;
         },
-        /**  
+        /**
          * Credit Card Control
-         * @from : http://af-design.com/blog/2010/08/18/validating-credit-card-numbers 
+         * @from : http://af-design.com/blog/2010/08/18/validating-credit-card-numbers
          */
         creditCard : function( val ){
             var reg, cardNumber, pos, digit, i, sub_total, sum = 0, strlen;
@@ -290,7 +290,7 @@
             checked : function( _inp ){
                 return ( !_inp.checked ) ? false : true ;
             },
-            maxChecked : function( _inp, arg ){  
+            maxChecked : function( _inp, arg ){
                 var count =  $( this.form.querySelectorAll( 'input[type=checkbox][name='+ _inp.name +']' ) ).filter( ':checked' ).length ;
                 return ( count > arg ) ? false : true ;
             },
@@ -305,7 +305,7 @@
                 return ( val === '' || val === null ) ? false : true ;
             },
             maxSelected : function( val, arg){
-                return ( val !== null && val !== '' && val.length > arg ) ? false : true ; 
+                return ( val !== null && val !== '' && val.length > arg ) ? false : true ;
             },
             minSelected : function( val, arg ){
                 return ( val !== null && val !== '' && val.length < arg ) ? false : true ;
@@ -357,9 +357,9 @@
             errorObject.appendChild( errorCloseObject );
             // we have an error so we need to break submit
             // set to handler true
-            this.handler = true ; 
+            this.handler = true ;
         },
-        /** 
+        /**
          * @property : close
          * @params _inp : the error message window which will be disappear
          */
@@ -380,21 +380,21 @@
         // if _inp is undefined ( This is the process of resetting all <form> )
         // or _inp is an object that has element more than one
         // and these elements are not checkbox
-        if( typeof _inp === 'undefined' || ( _inp.length > 1 && _inp[0].getAttribute('type') !== 'checkbox' ) ){ 
-            _errorMessages = $(this.form).find( '.'+ this.options.errorClass ); 
+        if( typeof _inp === 'undefined' || ( _inp.length > 1 && _inp[0].getAttribute('type') !== 'checkbox' ) ){
+            _errorMessages = $(this.form).find( '.'+ this.options.errorClass );
         }
-        else{ 
-            _errorMessages = $(_inp[0].parentNode).find( '.'+this.options.errorClass ); 
+        else{
+            _errorMessages = $(_inp[0].parentNode).find( '.'+this.options.errorClass );
         }
         for(var i = _errorMessages.length -1; i >= 0; i--){
             this.window.close.call( this, _errorMessages[i] );
-        } 
+        }
     };
     /**
      * @method clear
      *   Clears the left and right spaces of parameter.
      * @param {string} value
-     * @return {String} 
+     * @return {String}
      */
     Validetta.prototype.clear = function( value ){
       return value.replace( /^\s+|\s+$/g, '' );
@@ -423,7 +423,7 @@
         })
         .done( function( result ){ that.options.ajax.success( that, result ); } )
         .fail( function( jqXHR, textStatus ){ that.options.ajax.fail( jqXHR, textStatus ); } )
-        .always( function( result ){ that.options.ajax.complete( result ); } ); 
+        .always( function( result ){ that.options.ajax.complete( result ); } );
     };
     /**
      * Plugin Validetta
